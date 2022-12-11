@@ -1,0 +1,21 @@
+
+.navbar{
+    font-family: 'Comforter Brush', cursive
+}
+.logo span{
+    color:rgb(76, 76, 215);
+}
+.items-number{
+    position: absolute;
+    top:1%;
+    font-size: 1.2rem;
+    right:-3%;
+    /* left:61%; */
+    color:rgb(255, 48, 12);
+    border:2px solid rgb(21, 119, 199);
+    border-radius: 50%;
+    background-color: rgba(246, 243, 249, 0.745);
+}
+.fa-cart-shopping{
+position: relative;
+}

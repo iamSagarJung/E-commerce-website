@@ -1,0 +1,11 @@
+form{
+    width:50%;
+    margin:auto;
+}
+.fa-regular{
+    position: absolute;
+    right: 5%;
+    top:22%;
+    cursor: pointer;
+}
+
