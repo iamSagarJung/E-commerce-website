@@ -39,17 +39,17 @@ const Navbar = () => {
 
       <div id="navbarBasicExample" className={active?"navbar-menu is-active":"navbar-menu"}>
         <div className="navbar-end is-size-4">
-          <NavLink to="/home" className="navbar-item">
+          <NavLink to="/home" className="navbar-item" onClick={()=>setActive(false)}>
             Home
           </NavLink>
-          <NavLink to="/shop" className="navbar-item">
+          <NavLink to="/product" className="navbar-item"onClick={()=>setActive(false)}>
             Shop
           </NavLink>
-          <NavLink to="/contact" className="navbar-item">
+          <NavLink to="/contact" className="navbar-item" onClick={()=>setActive(false)}>
             Contact
           </NavLink>
           <div className="cart-logo navbar-item mr-5">
-            <NavLink to="/cart">
+            <NavLink to="/cart" onClick={()=>setActive(false)}>
               <i className="fa-solid fa-cart-shopping"></i>
             </NavLink>
             <p className="items-number">1</p>

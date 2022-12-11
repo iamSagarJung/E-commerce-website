@@ -2,21 +2,17 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { BsInstagram, BsFacebook, BsTwitter } from "react-icons/bs";
 import { RiPaypalFill, RiVisaFill } from "react-icons/ri";
-import { FaCcMastercard, FaCcPaypal } from "react-icons/fa";
+import { FaCcMastercard, FaCcPaypal, FaStore } from "react-icons/fa";
  
 const Footer = () => {
   return (
     <>
-      <section className="section pt-0-tablet pb-0-tablet pl-0-tablet has-background-light is-clipped">
+      <section className="section ">
         <div className="columns is-multiline">
-          <div className="column is-3-desktop is-5-tablet px-6 py-20 has-background-white">
+          <div className="column  px-6 py-20 has-background-white">
             <div className="has-mw-xs mx-auto">
               <a className="mb-12 is-inline-block" href="#">
-                <img
-                  className="image"
-                  src="yofte-assets/logos/yofte-logo.svg"
-                  alt=""
-                />
+                <FaStore className="fa-2x"/>
               </a>
               <div className="mb-12 has-text-weight-semibold">
                 <p>Our Store</p>
@@ -48,7 +44,7 @@ const Footer = () => {
             </div>
           </div>
           <div
-            className="column is-9-desktop is-7-tablet px-6 py-20 pl-40-desktop"
+            className="column is-9-desktop  px-6 py-20 "
             style={{ borderBottom: "1px solid rgba(0, 0, 0, 0.1)" }}
           >
             <ul className="mb-16 columns is-mobile is-multiline">

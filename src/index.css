@@ -1,11 +1,13 @@
 @import url('https://fonts.googleapis.com/css2?family=Shadows+Into+Light&display=swap');
 @import url("https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css");
+ @import url('https://fonts.googleapis.com/css2?family=Inconsolata:wght@500&display=swap');
 *{
     padding:0;
     margin:0;
     box-sizing: border-box;
     list-style: none;
     text-decoration: none;
+    text-transform: capitalize;
 }
 
 html{
@@ -15,8 +17,9 @@ html{
   
   .section-center {
     margin: 0 auto;
-    height: 550px; 
+    min-height: 550px; 
     position: relative;
+    overflow:hidden
   }
 
   .section{
@@ -58,3 +61,49 @@ html{
   article.nextSlide {
     transform: translateX(100%);
   }
+.all-product .card{
+  width:200px;
+  height:300px;
+  margin:auto;
+  background-color: rgba(240, 237, 237, 0.199);
+  cursor: pointer;
+
+}
+
+.all-product .card:hover{
+  transform: scale(1.1);
+  background-color: rgba(64, 64, 64, 0.082);
+}
+.product-title{
+  font-family: 'Bebas Neue', cursive;
+
+}
+.category{
+  font-family: 'Inconsolata', monospace;
+
+}
+
+.all-product .card-image{
+  width:200px;
+  height:80px;
+  
+}
+.product-heading{
+  height:60px;
+}
+
+s {
+  display: inline-block;
+  text-decoration: none;
+  position: relative;
+}
+s:after {
+  content: '';
+  display: block;
+  width: 100%;
+  height: 50%;
+  position: absolute;
+  top: 10%;
+  left: 0;
+  border-bottom: 2px solid;
+}
