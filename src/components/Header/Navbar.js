@@ -3,11 +3,12 @@ import { NavLink } from "react-router-dom";
 import "./Navbar.css";
 import {AiOutlineMenu} from "react-icons/ai"
 import {GrClose} from "react-icons/gr"
+import { useProductContext } from "../../store/context/product-context";
 
 
 const Navbar = () => {
   const [active,setActive]=useState(false) 
-
+const {noOfItems}=useProductContext()
   const toggleActive=()=>{
     setActive(()=>{
       return !active
@@ -52,7 +53,7 @@ const Navbar = () => {
             <NavLink to="/cart" onClick={()=>setActive(false)}>
               <i className="fa-solid fa-cart-shopping"></i>
             </NavLink>
-            <p className="items-number">1</p>
+            <p className="items-number">{noOfItems}</p>
           </div>
           <div className="navbar-item">
             <button className="button  has-background-danger">Log out</button>

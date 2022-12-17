@@ -3,7 +3,6 @@ import React from 'react'
 const productReducer = (state,action) => {
  const {type,payload}=action
 
-
  if(type==="SET_LOADING"){
     return {
         ...state,
@@ -18,17 +17,44 @@ const productReducer = (state,action) => {
         }
     }
 
-    if(type==="GET_SINGLE_PRODUCTS"){
-        const singleItem=state.allProduct.filter(()=>{
-            return state.allProduct.id!==payload
-        })
+    if(type==="GET_SINGLE_PRODUCT"){
         return{
             ...state,
             isLoading:false,
-            productDetail:singleItem
+            productDetail:payload
         }
     }
+    if(type==="INCREMENT"){
+        let increment;
+        if(state.noOfItems===9){
+            increment=state.noOfItems
+        }else{
+            increment=state.noOfItems+1
+        }
+        return {
+            ...state,
+            noOfItems:increment,
+        }
+    }
+
+    if(type==="DECREMENT"){
+        let decrement;
+        if(state.noOfItems===1){
+            decrement=state.noOfItems
+        }else{
+            decrement=state.noOfItems-1
+        }
+        return {
+            ...state,
+            noOfItems:decrement
+        }
+    }
+
+
  return state;
 }
 
 export default productReducer
+
+
+

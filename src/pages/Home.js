@@ -50,7 +50,7 @@ useEffect(()=>{
               accusamus cumque a dignissimos modi libero dicta maiores at, eaque
               enim aut distinctio.
             </p>
-            <NavLink to="/shop">
+            <NavLink to="/product">
               <button className="button is-danger mt-5 has-text-weight-semibold ">
                 Shop Now
               </button>
@@ -119,7 +119,6 @@ useEffect(()=>{
           </span>
         </div>
       </section>
-      <Footer/>
     </>
   );
 };

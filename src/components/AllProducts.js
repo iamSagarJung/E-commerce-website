@@ -5,16 +5,13 @@ import Price from "./helpers/Price";
 import StarRating from "./helpers/StarRating";
 import Loading from "./Loading";
 
-const AllProducts = () => {
-  const { allProduct, isLoading } = useProductContext();
+const AllProducts = ({filterProducts}) => {
+  const { allProduct } = useProductContext();
 
-  if (isLoading) {
-    return <Loading/>;
-  }
   return (
     <>
-      <div className="m-6 columns  is-flex is-flex-direction-row is-flex-wrap-wrap is-justify-content-center is-align-items-center">
-        {allProduct.map((product) => {
+      <div className=" columns  is-flex is-flex-direction-row is-flex-wrap-wrap is-justify-content-center is-align-items-center">
+        {filterProducts.map((product) => {
           const { id, title, price, image, rating, category } = product;
           const dPrice = price + (20 / 100) * price;
 
@@ -40,7 +37,6 @@ const AllProducts = () => {
                     <div>
                       <StarRating rating={rating.rate} />
                       <span className="category has-text-grey is-size-7">
-                        {" "}
                         ({rating.count})
                       </span>
                     </div>
@@ -50,7 +46,6 @@ const AllProducts = () => {
                       </span>
                       <span className="is-flex is-justify-content-space-between">
                         <s className="is-size-7 has-text-grey has-text-weight-bold">
-                          {" "}
                           <Price price={dPrice} />
                         </s>
                         <p className="is-size-7 has-text-danger-dark has-text-weight-bold">

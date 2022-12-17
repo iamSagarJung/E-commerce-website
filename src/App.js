@@ -1,29 +1,88 @@
-import React from 'react'
-import { Route, Routes } from 'react-router-dom'
-import LoginForm from './components/authentication/LoginForm'
-import Footer from './components/Header/Footer'
-import Navbar from './components/Header/Navbar'
-import Cart from './pages/Cart'
-import Contact from './pages/Contact'
-import Home from './pages/Home'
-import Shop from './pages/Shop'
-import SingleProduct from './pages/ProductDetails'
+import React, { lazy, Suspense } from "react";
+import { Route, Routes } from "react-router-dom";
+import Error from "./components/Header/Error";
+import Loading from "./components/Loading";
+const LoginForm = lazy(() => import("./components/authentication/LoginForm"));
+const Navbar = lazy(() => import("./components/Header/Navbar"));
+const Cart = lazy(() => import("./pages/Cart"));
+const Contact = lazy(() => import("./pages/Contact"));
+const Home = lazy(() => import("./pages/Home"));
+const Shop = lazy(() => import("./pages/Shop"));
+const SingleProduct = lazy(() => import("./pages/ProductDetails"));
+const Footers = lazy(() => import("./components/Header/Footer"));
+
 
 const App = () => {
   return (
     <>
       {/* <LoginForm/> */}
-      <Navbar/>
+      <Navbar />
       {/* <Home/> */}
       <Routes>
-        <Route path="/home" element={<Home/> }/>
-        <Route path="/contact" element={<Contact/> }/>
-        <Route path="/product" element={<Shop/> }/>
-        <Route path="/cart" element={<Cart/> }/>
-        <Route path='/product/:id' element={<SingleProduct/>}/>
-      </Routes>
-    </>
-  )
-}
+        <Route
+          path="/home"
+          element={
+            <Suspense fallback={<Loading />}>
+              <Home />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/contact"
+          element={
+            <Suspense fallback={<Loading />}>
+              <Contact />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/product"
+          element={
+            <Suspense fallback={<Loading />}>
+              <Shop />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/cart"
+          element={
+            <Suspense fallback={<Loading />}>
+              <Cart />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/product/:id"
+          element={
+            <Suspense fallback={<Loading />}>
+              <SingleProduct />
+            </Suspense>
+          }
+        />
 
-export default App
+         <Route
+          path="/*"
+          element={
+            <Suspense fallback={<Loading />}>
+              <Error />
+            </Suspense>
+          }
+        />
+{/* 
+<Route
+          path="/product/:id/*"
+          element={
+            <Suspense fallback={<Loading />}>
+              <Error />
+            </Suspense>
+          }
+        /> */}
+      </Routes>
+      <Suspense fallback={<Loading />}>
+        <Footers />
+      </Suspense>
+    </>
+  );
+};
+
+export default App;

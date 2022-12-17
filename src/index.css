@@ -92,7 +92,7 @@ html{
   height:60px;
 }
 
-s {
+s{
   display: inline-block;
   text-decoration: none;
   position: relative;
@@ -106,4 +106,7 @@ s:after {
   top: 10%;
   left: 0;
   border-bottom: 2px solid;
+}
+.button:hover{
+  transform: scale(0.99);
 }

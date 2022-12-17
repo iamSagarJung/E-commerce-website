@@ -1,0 +1,7 @@
+.error-page {
+  background: url(galaxy.jpg) no-repeat;
+  -webkit-text-fill-color: transparent;
+  -webkit-background-clip: text;
+  font-size:7rem;
+  font-weight: 1000;
+}
