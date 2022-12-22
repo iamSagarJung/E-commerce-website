@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { createContext, useState } from "react";
 import Home from "../../pages/Home";
 import Navbar from "../Header/Navbar";
 import "./LoginForm.css";
+
+
+const AuthContext=createContext()
 
 const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);

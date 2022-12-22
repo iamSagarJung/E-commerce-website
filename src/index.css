@@ -24,7 +24,6 @@ html{
 
   .section{
     background-color:hsl(210, 36%, 96%);;
-
   }
  
   .prev,
@@ -79,7 +78,7 @@ html{
 
 }
 .category{
-  font-family: 'Inconsolata', monospace;
+  font-family: 'Chivo Mono', monospace;
 
 }
 

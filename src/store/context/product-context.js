@@ -8,7 +8,6 @@ const initialState={
     allProduct:[],
     isLoading:false,
     productDetail:{},
-    noOfItems:1,
 }
 
 export const ProductProvider=({children})=>{
@@ -20,6 +19,7 @@ export const ProductProvider=({children})=>{
         dispatch({type:"SET_LOADING"})
         const response=await fetch(url)
         const data=await response.json()
+        console.log(data[0].title.toLowerCase())
         dispatch({type:"GET_PRODUCTS_DATA",payload:data})
     }
 
@@ -31,13 +31,7 @@ export const ProductProvider=({children})=>{
         dispatch({type:"GET_SINGLE_PRODUCT",payload:productDetail})
     }
 
-    // increase number of items
-    const increment=()=>{
-        dispatch({type:"INCREMENT"})
-    }
-    const decrement=()=>{
-        dispatch({type:"DECREMENT"})
-    }
+
 
     const sortCategory=(e)=>{
         dispatch({type:"SORT_CATEGORY",payload:e.target.textContent})
@@ -51,7 +45,7 @@ export const ProductProvider=({children})=>{
     //     sortCategory()
     // },[])
 
-    return <ProductContext.Provider value={{...state,getProductDetails,increment,decrement,sortCategory}}>
+    return <ProductContext.Provider value={{...state,getProductDetails,sortCategory}}>
         {children}
     </ProductContext.Provider>
 }

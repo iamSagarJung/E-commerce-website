@@ -13,11 +13,12 @@ const Contact = () => {
         referrerPolicy="no-referrer-when-downgrade"
       ></iframe>
 
-<div className="container my-5 mt-5 mx-5 px-5">
+<div className="container my-5" style={{maxWidth:"800px"}}>
+    <div className="mx-6 px-6">
     <h2 className="title is-2 is-capitalized has-text-centered">Contact Us</h2>
     <form action="https://formspree.io/f/meqdypoq" method="post">
         <div className="field">
-            <label for="name" className="label is-size-4 has-text-weight-light"></label>
+            <label htmlFor="name" className="label is-size-4 has-text-weight-light"></label>
             <div className="control has-icons-left">
                 <input type="text" name="name" id="name" className="input" placeholder="Name" autoFocus/>
                     <span className="icon is-left">
@@ -40,6 +41,7 @@ const Contact = () => {
         </div>
         <button type="submit" className="button is-success is-size-5 is-fullwidth">Send Message</button>
     </form>
+    </div>
 </div>
     </>
   );

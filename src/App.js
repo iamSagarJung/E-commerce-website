@@ -47,7 +47,7 @@ const App = () => {
           path="/cart"
           element={
             <Suspense fallback={<Loading />}>
-              <Cart />
+              <Cart/>
             </Suspense>
           }
         />
@@ -68,15 +68,6 @@ const App = () => {
             </Suspense>
           }
         />
-{/* 
-<Route
-          path="/product/:id/*"
-          element={
-            <Suspense fallback={<Loading />}>
-              <Error />
-            </Suspense>
-          }
-        /> */}
       </Routes>
       <Suspense fallback={<Loading />}>
         <Footers />

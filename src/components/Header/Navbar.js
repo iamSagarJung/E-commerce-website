@@ -19,7 +19,7 @@ const {noOfItems}=useProductContext()
       role="navigation"
       aria-label="main navigation"
     >
-      <div className="navbar-brand">
+      <div className="navbar-brand is-table">
         <span className="navbar-item ml-6  is-size-3" href="https://bulma.io">
           <NavLink to="/home" className="logo navbar-item has-text-weight-bold">
             My<span>Deal</span>

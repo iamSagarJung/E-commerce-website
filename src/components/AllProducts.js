@@ -1,15 +1,13 @@
 import React from "react";
 import { NavLink } from "react-router-dom";
-import { useProductContext } from "../store/context/product-context";
 import Price from "./helpers/Price";
 import StarRating from "./helpers/StarRating";
-import Loading from "./Loading";
 
 const AllProducts = ({filterProducts}) => {
-  const { allProduct } = useProductContext();
 
   return (
     <>
+  
       <div className=" columns  is-flex is-flex-direction-row is-flex-wrap-wrap is-justify-content-center is-align-items-center">
         {filterProducts.map((product) => {
           const { id, title, price, image, rating, category } = product;
@@ -17,8 +15,8 @@ const AllProducts = ({filterProducts}) => {
 
           return (
             <NavLink to={`/product/${id}`} key={id}>
-              <div className="column all-product ">
-                <div className=" card p-1">
+              <div className="column all-product mb-5">
+                <div className=" card mr-5 p-1">
                   <section className="card-image  is-flex  is-hoverable is-justify-content-center is-align-items-center">
                     <figure className="image is-64x64 ">
                       <img src={image} alt={title} className="" />
