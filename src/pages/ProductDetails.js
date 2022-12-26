@@ -1,8 +1,8 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { AiOutlineMinusCircle, AiOutlinePlusCircle } from "react-icons/ai";
 import { MdOutlineLocalShipping, MdSupport } from "react-icons/md";
 import { RiRefund2Fill } from "react-icons/ri";
-import { useParams } from "react-router-dom";
+import { NavLink, useParams } from "react-router-dom";
 import Price from "../components/helpers/Price";
 import StarRating from "../components/helpers/StarRating";
 import Loading from "../components/Loading";
@@ -12,16 +12,34 @@ const api = "https://fakestoreapi.com/products";
 
 const ProductDetails = () => {
   const {isLoading,productDetail,getProductDetails} = useProductContext();
-
-  const { increment,decrement,noOfItems,}=useCartContext()
+  const { addToCart}=useCartContext()
   const { id } = useParams();
-
-
   const { image, price, title, description, rating, category } = productDetail;
+
+
+  const [amount,setAmount]=useState(1)
+
+  const increment=()=>{
+    if(amount<9){
+      setAmount(amount+1)
+    }else{
+      setAmount(amount)
+    }
+  }
+
+  const decrement=()=>{
+    if(amount>1){
+      setAmount(amount-1)
+    }else{
+      setAmount(amount)
+    }
+  }
+
   useEffect(() => {
     getProductDetails(`${api}/${id}`);
   }, []);
 
+  
   // loading is appeared when data is not loaded
   if (isLoading) return <Loading />;
 
@@ -83,13 +101,16 @@ const ProductDetails = () => {
             <span className="mr-4  has-text-grey">
               <AiOutlineMinusCircle onClick={decrement} />
             </span>
-            <p className="is-size-5">{noOfItems}</p>
+            <p className="is-size-5">{amount}</p>
             <p className="ml-4 has-text-grey">
               <AiOutlinePlusCircle onClick={increment} />
             </p>
           </div>
+          <NavLink to="/cart" onClick={()=>addToCart(id,amount,productDetail)}>
           <button className="button is-link is-white mt-2 ">add to cart</button>
+          </NavLink>
         </div>
+        
       </div>
     </>
   );

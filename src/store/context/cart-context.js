@@ -3,9 +3,11 @@ import { createContext } from "react";
 import reducer from "../reducer/cartReducer";
 
 const initalState = {
-  noOfItems:1,
+  noOfItems:"",
   price:0,
-  cart:[]
+  cart:[],
+ totalPrice:'',
+  totalAmount:"",
 };
 
 const CartContext = createContext();
@@ -15,22 +17,19 @@ export const CartProvider = ({ children }) => {
 const [state, dispatch] = useReducer(reducer, initalState);
 
     // increase number of items
-    const increment=()=>{
-      dispatch({type:"INCREMENT"})
+    const increment=(id)=>{
+      dispatch({type:"INCREMENT",payload:id})
   }
     // decrease number of items
-  const decrement=()=>{
-      dispatch({type:"DECREMENT"})
+  const decrement=(id)=>{
+      dispatch({type:"DECREMENT",payload:id})
   }
-
-    const addToCart=()=>{
-      dispatch({type:"ADD_TO_CART"})
+    const addToCart=(id,amount,productDetail)=>{
+      dispatch({type:"ADD_TO_CART",payload:{id,amount,productDetail}})
     }
-
     const removeFromCart=(id)=>{
       dispatch({type:"REMOVE_FROM_CART",payload:id})
     }
-
 
   return <CartContext.Provider value={{...state,increment,decrement,addToCart,removeFromCart}}>
     {children}

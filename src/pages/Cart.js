@@ -1,16 +1,14 @@
 import React from "react";
-import { useSortContext } from "../store/context/SortContext";
 import {
   AiFillDelete,
   AiOutlineMinusCircle,
   AiOutlinePlusCircle,
 } from "react-icons/ai";
 import Price from "../components/helpers/Price";
-import { useProductContext } from "../store/context/product-context";
+import { useCartContext } from "../store/context/cart-context";
 
 const Cart = () => {
-  const { allproducts } = useSortContext();
-  const { increment, decrement, noOfItems } = useProductContext();
+  const {cart,removeFromCart,increment,decrement}=useCartContext()
 
   return (
     <div className="mx-6 my-6 has-text-centered">
@@ -22,11 +20,11 @@ const Cart = () => {
         <p className="column">Remove</p>
       </div>
       <hr />
-      {allproducts.map((item) => {
-        const { image, price, title, id } = item;
+      {cart.map((item) => {
+        const { image, price, title, id,amount } = item;
         return (
-          <>
-            <div className="columns  mb-6 has-text-centered" key={id}>
+          <div  key={id}>
+            <div className="columns  mb-6 has-text-centered">
               <div className="column">
                 <img
                   src={image}
@@ -35,33 +33,33 @@ const Cart = () => {
                 />
               </div>
 
-              <p className="column">
+              <div className="column">
                 <Price price={price} />
-              </p>
+              </div>
               <div className="column is-flex is-justify-content-center is-align-items-center ">
                 <span className="has-text-grey mr-1 is-size-5 icon">
                   <AiOutlinePlusCircle
-                    onClick={increment}
+                    onClick={()=>increment(id)}
                     className="has-text-success"
                   />
                 </span>
-                <span className="mr-1">{noOfItems}</span>
+                <span className="mr-1">{amount}</span>
                 <span className="has-text-grey is-size-5 icon">
                   <AiOutlineMinusCircle
-                    onClick={decrement}
+                    onClick={()=>decrement(id)}
                     className="has-text-danger"
                   />
                 </span>
               </div>
-              <p className="column">
-                <Price price={price} />
-              </p>
-              <p className="column has-text-danger-dark">
+              <div className="column">
+                <Price price={price*amount} />
+              </div>
+              <p className="column has-text-danger-dark" onClick={()=>removeFromCart(id)}>
                 <AiFillDelete />
               </p>
             </div>
             <hr />
-          </>
+          </div>
         );
       })}
     </div>

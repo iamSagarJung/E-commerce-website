@@ -109,3 +109,21 @@ s:after {
 .button:hover{
   transform: scale(0.99);
 }
+.cart-icon{
+  z-index:99
+}
+
+.cart-count {
+  position: absolute;
+  top: 14px;
+  left: 35px;
+  font-size: 18px;
+  font-weight: bold;
+  border-radius: 50%;
+  line-height: 20px;
+  text-align: center;
+  background-color: rgba(41, 117, 224, 0.852);
+  color: rgb(252, 252, 252);
+  padding:5px;
+  z-index:0
+}
