@@ -13,8 +13,8 @@ const Contact = () => {
         referrerPolicy="no-referrer-when-downgrade"
       ></iframe>
 
-<div className="container my-5" style={{maxWidth:"800px"}}>
-    <div className="mx-6 px-6">
+<div className="container my-5" style={{maxWidth:"900px"}}>
+    <div className="">
     <h2 className="title is-2 is-capitalized has-text-centered">Contact Us</h2>
     <form action="https://formspree.io/f/meqdypoq" method="post">
         <div className="field">

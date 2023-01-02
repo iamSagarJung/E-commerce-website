@@ -1,55 +1,69 @@
-import { createContext, useContext, useEffect, useReducer, useState } from "react"
-import reducer from "../reducer/productReducer"
-const api="https://fakestoreapi.com/products"
+import {
+  createContext,
+  useContext,
+  useEffect,
+  useReducer,
+  useState,
+} from "react";
+import reducer from "../reducer/productReducer";
 
-const ProductContext=createContext()
+const api = "https://fakestoreapi.com/products";
 
-const initialState={
-    allProduct:[],
-    isLoading:false,
-    productDetail:{},
-}
+const ProductContext = createContext();
 
-export const ProductProvider=({children})=>{
+const initialState = {
+  allProduct: [],
+  isLoading: false,
+  productDetail: {},
+};
 
-    const [state,dispatch]=useReducer(reducer,initialState)
+export const ProductProvider = ({ children }) => {
+  const [state, dispatch] = useReducer(reducer, initialState);
+  const { isSignIn, setIsSignIn } = useState(false);
 
-    // fetching data
-    const fetchedData=async (url)=>{
-        dispatch({type:"SET_LOADING"})
-        const response=await fetch(url)
-        const data=await response.json()
-        console.log(data[0].title.toLowerCase())
-        dispatch({type:"GET_PRODUCTS_DATA",payload:data})
-    }
+  // fetching data
+  const fetchedData = async (url) => {
+    dispatch({ type: "SET_LOADING" });
+    const response = await fetch(url);
+    const data = await response.json();
+    dispatch({ type: "GET_PRODUCTS_DATA", payload: data });
+  };
 
-    // get single product
-    const getProductDetails=async (url)=>{
-        dispatch({type:"SET_LOADING"})
-        const response=await fetch(url)
-        const productDetail=await response.json()
-        dispatch({type:"GET_SINGLE_PRODUCT",payload:productDetail})
-    }
+  // get single product
+  const getProductDetails = async (url) => {
+    dispatch({ type: "SET_LOADING" });
+    const response = await fetch(url);
+    const productDetail = await response.json();
+    dispatch({ type: "GET_SINGLE_PRODUCT", payload: productDetail });
+  };
 
+  const sortCategory = (e) => {
+    dispatch({ type: "SORT_CATEGORY", payload: e.target.textContent });
+  };
 
+  useEffect(() => {
+    fetchedData(api);
+  }, []);
 
-    const sortCategory=(e)=>{
-        dispatch({type:"SORT_CATEGORY",payload:e.target.textContent})
-       }
+  // useEffect(()=>{
+  //     sortCategory()
+  // },[])
 
-    useEffect(() => { 
-      fetchedData(api)
-    }, [])
-
-    // useEffect(()=>{
-    //     sortCategory()
-    // },[])
-
-    return <ProductContext.Provider value={{...state,getProductDetails,sortCategory}}>
-        {children}
+  return (
+    <ProductContext.Provider
+      value={{
+        ...state,
+        getProductDetails,
+        sortCategory,
+        isSignIn,
+        setIsSignIn,
+      }}
+    >
+      {children}
     </ProductContext.Provider>
-}
+  );
+};
 
-export const useProductContext=()=>{
-    return useContext(ProductContext)
-}
+export const useProductContext = () => {
+  return useContext(ProductContext);
+};

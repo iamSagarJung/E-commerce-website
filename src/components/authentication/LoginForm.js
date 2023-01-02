@@ -1,12 +1,10 @@
-import React, { createContext, useState } from "react";
-import Home from "../../pages/Home";
-import Navbar from "../Header/Navbar";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../../store/context/AuthContext";
 import "./LoginForm.css";
 
-
-const AuthContext=createContext()
-
 const LoginForm = () => {
+  const Navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
   const [inputPassword, setInputPassword] = useState("");
   const [inputEmail, setInputEmail] = useState("");
@@ -17,12 +15,11 @@ const LoginForm = () => {
   const [showSignup, setShowSignup] = useState(false);
   const [error, setError] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  const [isLogin, setIsLogin] = useState(false);
   let formIsValid = false;
 
+  const { setIsSignIn } = useAuthContext();
   // Email and Password validation
   const tooggleLogin = () => {
-    // setError();
     setShowSignup((prevState) => {
       return !prevState;
     });
@@ -81,7 +78,7 @@ const LoginForm = () => {
   }
 
   // firebase authentication
-  const fetchedData = async (url, errMsg) => {
+  const fetchedData = async (url) => {
     setIsLoading(true);
     const response = await fetch(url, {
       method: "POST",
@@ -97,14 +94,12 @@ const LoginForm = () => {
     const data = await response.json();
     if (data && data.error && data.error.message) {
       setError(data.error.message);
-      console.log(data);
     } else {
-      setError(errMsg);
       setInputEmail("");
       setInputPassword("");
       if (!showSignup) {
-        setIsLogin(true);
-        console.log("logged in");
+        Navigate("/");
+        setIsSignIn(true);
       }
     }
     setIsLoading(false);
@@ -115,8 +110,7 @@ const LoginForm = () => {
 
     if (showSignup) {
       fetchedData(
-        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCxFRoh30b4410frmD97-s1E8WDygWbKGA",
-        "Account created Succesfully"
+        "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyCxFRoh30b4410frmD97-s1E8WDygWbKGA"
       );
     } else {
       fetchedData(
@@ -125,15 +119,9 @@ const LoginForm = () => {
     }
   };
 
-  // if (isLogin) {
-  //   return <>
-  //   {/* <Navbar/> */}
-  //   {/* <Home /> */}
-  //   </> 
-  // }
   return (
-    <div>
-      <section className="hero  is-fullheight-with-navbar">
+    <div className="container is-fluid">
+      <section className="hero  is-fullheight">
         <form className="box" onSubmit={(e) => e.preventDefault()}>
           <h1 className="title has-text-centered">
             {showSignup ? "Sign Up" : "Log in"}
@@ -179,6 +167,7 @@ const LoginForm = () => {
                 value={inputPassword}
                 onBlur={passwordBlurHandler}
               />
+              {/* {showPassword?<ErrorModal/>:null} */}
               <span className="icon is-small is-left">
                 <i className="fas fa-lock"></i>
               </span>
@@ -208,7 +197,7 @@ const LoginForm = () => {
                   ? "button is-fullwidth  is-success is-loading"
                   : "button is-fullwidth  is-success"
               }
-              // disabled={!formIsValid}
+              disabled={!formIsValid}
               onClick={submitHandler}
             >
               {showSignup ? "Create Account" : "Login"}
@@ -223,14 +212,6 @@ const LoginForm = () => {
             >
               {showSignup ? "Login with existing account?" : "Create Account? "}
             </button>
-            {isLogin && (
-              <button
-                className="button is-danger is-fullwidth mt-2"
-                onClick={() => setIsLogin(false)}
-              >
-                Logout
-              </button>
-            )}
           </div>
         </form>
       </section>

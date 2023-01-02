@@ -5,7 +5,6 @@ import { RiRefund2Fill } from "react-icons/ri";
 import { Data } from "../data/TestimonialData";
 import { FiChevronRight, FiChevronLeft } from "react-icons/fi";
 import { FaQuoteRight } from "react-icons/fa";
-import Footer from "../components/Header/Footer";
 
 const Home = () => {
   const [index, setIndex] = useState(0);
@@ -26,14 +25,14 @@ const Home = () => {
     }
   };
 
-useEffect(()=>{
-  let slider=setInterval(()=>{
-    nextSlide()
-  },5000)
-  return ()=>{
-  clearInterval(slider)
-  }
-},[index])
+  useEffect(() => {
+    let slider = setInterval(() => {
+      nextSlide();
+    }, 5000);
+    return () => {
+      clearInterval(slider);
+    };
+  }, [index]);
 
   return (
     <>
@@ -57,7 +56,7 @@ useEffect(()=>{
             </NavLink>
           </div>
           <figure className="image column px-6 py-6">
-            <img src="img/home2.jpg" />
+            <img src="img/home.jpg" />
           </figure>
         </div>
       </div>
@@ -82,11 +81,10 @@ useEffect(()=>{
 
       {/* ---------Testomonials--------- */}
 
-
       <section className="section">
-          <h2 className="title   has-text-centered">
-            <span className="has-text-danger-dark">/</span>Testomonials
-          </h2>
+        <h2 className="title   has-text-centered">
+          <span className="has-text-danger-dark">/</span>Testomonials
+        </h2>
         <div className="section-center  mx-6  has-text-centered">
           {Data.map((person, personIndex) => {
             const { image, Name, id, desc, position } = person;
@@ -94,18 +92,24 @@ useEffect(()=>{
             if (personIndex === index) {
               activeClass = "activeSlide";
             }
-            if(personIndex===index-1 || index===0 && personIndex===Data.length-1){
-              activeClass="lastSlide"
+            if (
+              personIndex === index - 1 ||
+              (index === 0 && personIndex === Data.length - 1)
+            ) {
+              activeClass = "lastSlide";
             }
-           
 
             return (
               <article key={id} className={` ${activeClass}`}>
-               <figure className="image is-128x128 is-inline-block mb-3 ">
-                <img className="is-rounded" src={image} alt={Name}/>
-              </figure>
-                <h4 className="is-size-5 has-text-weight-bold has-text-danger-dark">{Name}</h4>
-                <p className="has-text-grey is-family-monospace mb-5">{position}</p>
+                <figure className="image is-128x128 is-inline-block mb-3 ">
+                  <img className="is-rounded" src={image} alt={Name} />
+                </figure>
+                <h4 className="is-size-5 has-text-weight-bold has-text-danger-dark">
+                  {Name}
+                </h4>
+                <p className="has-text-grey is-family-monospace mb-5">
+                  {position}
+                </p>
                 <p className="has-text-grey px-6">{desc}</p>
                 <FaQuoteRight className="fa-2x mt-5 has-text-danger-dark"></FaQuoteRight>
               </article>

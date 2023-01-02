@@ -1,15 +1,15 @@
 import React from "react";
-import {
-  AiFillDelete,
-  AiOutlineMinusCircle,
-  AiOutlinePlusCircle,
-} from "react-icons/ai";
+import {AiOutlineMinusCircle,AiFillDelete,AiOutlinePlusCircle,} from "react-icons/ai";
+import EmptyCartMsg from "../components/cart/EmptyCartMsg";
 import Price from "../components/helpers/Price";
+import TotalPrice from "../components/helpers/TotalPrice";
 import { useCartContext } from "../store/context/cart-context";
 
 const Cart = () => {
   const {cart,removeFromCart,increment,decrement}=useCartContext()
-
+  if(cart.length===0){
+    return <EmptyCartMsg/>
+  }
   return (
     <div className="mx-6 my-6 has-text-centered">
       <div className="columns">
@@ -62,6 +62,8 @@ const Cart = () => {
           </div>
         );
       })}
+      <TotalPrice/>
+
     </div>
   );
 };

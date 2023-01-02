@@ -7,7 +7,7 @@ const Error = () => {
     <h1 className='title  is-size- error-page'>Oops!</h1>
     <p className='title has-text-weight-bold is-size-5'>404-PAGE NOT FOUND</p>
     <p>the page you are looking for might have been removed had its name changed or is temporarily unavailable</p>
-    <NavLink to="/home">
+    <NavLink to="/">
         <button className='button is-link mt-4'>go to homepage</button>
     </NavLink>
   </section>

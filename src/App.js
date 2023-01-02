@@ -1,7 +1,9 @@
 import React, { lazy, Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
-import Error from "./components/Header/Error";
+import NavbarLoggedOut from "./components/authentication/Navbar";
 import Loading from "./components/Loading";
+import { useAuthContext } from "./store/context/AuthContext";
+const Error = lazy(() => import("./components/Header/Error"));
 const LoginForm = lazy(() => import("./components/authentication/LoginForm"));
 const Navbar = lazy(() => import("./components/Header/Navbar"));
 const Cart = lazy(() => import("./pages/Cart"));
@@ -10,23 +12,51 @@ const Home = lazy(() => import("./pages/Home"));
 const Shop = lazy(() => import("./pages/Shop"));
 const SingleProduct = lazy(() => import("./pages/ProductDetails"));
 const Footers = lazy(() => import("./components/Header/Footer"));
-
+const HomeAuth = lazy(() => import("./components/authentication/Home"));
 
 const App = () => {
+  const { isSignIn} = useAuthContext();
+  if (!isSignIn) {
+    return (
+      <>
+        <NavbarLoggedOut />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <Suspense fallback={<Loading />}>
+                <HomeAuth />
+              </Suspense>
+            }
+          />
+          <Route
+            path="/login"
+            element={
+              <Suspense fallback={<Loading />}>
+                <LoginForm />
+              </Suspense>
+            }
+          />
+          <Route path="*" element={ <Suspense fallback={<Loading />}>
+              <Error />
+            </Suspense>} />
+        </Routes>
+      </>
+    );
+  }
   return (
     <>
-      {/* <LoginForm/> */}
       <Navbar />
-      {/* <Home/> */}
       <Routes>
         <Route
-          path="/home"
+          path="/"
           element={
             <Suspense fallback={<Loading />}>
               <Home />
             </Suspense>
           }
         />
+
         <Route
           path="/contact"
           element={
@@ -47,7 +77,7 @@ const App = () => {
           path="/cart"
           element={
             <Suspense fallback={<Loading />}>
-              <Cart/>
+              <Cart />
             </Suspense>
           }
         />
@@ -60,8 +90,8 @@ const App = () => {
           }
         />
 
-         <Route
-          path="/*"
+        <Route
+          path="*"
           element={
             <Suspense fallback={<Loading />}>
               <Error />

@@ -2,6 +2,9 @@
 .navbar{
     font-family: 'Comforter Brush', cursive
 }
+.logo{
+    cursor: pointer;
+}
 .logo span{
     color:rgb(76, 76, 215);
 }

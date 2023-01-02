@@ -12,7 +12,7 @@ const api = "https://fakestoreapi.com/products";
 
 const ProductDetails = () => {
   const {isLoading,productDetail,getProductDetails} = useProductContext();
-  const { addToCart}=useCartContext()
+  const { addToCart,totalAmount}=useCartContext()
   const { id } = useParams();
   const { image, price, title, description, rating, category } = productDetail;
 
