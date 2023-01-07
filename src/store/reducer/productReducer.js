@@ -25,6 +25,13 @@ const productReducer = (state,action) => {
         }
     }
   
+    if(type==="API_ERROR"){
+        return {
+            ...state,
+            isLoading:false,
+            isError:true,
+        }
+    }
 
 
  return state;

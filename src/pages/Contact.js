@@ -27,7 +27,7 @@ const Contact = () => {
             </div>
         </div>
         <div className="field">
-            <label for="email" className="label is-size-4 has-text-weight-light"></label>
+            <label htmlFor="email" className="label is-size-4 has-text-weight-light"></label>
             <div className="control has-icons-left">
                 <input type="email" name="email" id="email" className="input" placeholder="Email"/>
                     <span className="icon is-left">
@@ -36,7 +36,7 @@ const Contact = () => {
             </div>
         </div>
         <div className="field">
-            <label for="message" className="label is-size-4 has-text-weight-light"></label>
+            <label htmlFor="message" className="label is-size-4 has-text-weight-light"></label>
             <textarea name="message" id="message" rows="5" className="textarea is-medium" placeholder="Message"></textarea>
         </div>
         <button type="submit" className="button is-success is-size-5 is-fullwidth">Send Message</button>
