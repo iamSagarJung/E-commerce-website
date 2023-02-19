@@ -6,17 +6,16 @@ const CartContext = createContext();
 
 const getLocalCartData = () => {
   let localCartData = localStorage.getItem("cartItem");
-  if (localCartData == []) {
-    return [];
+  if (localCartData) {
+    return JSON.parse(localCartData)
   } else {
-    return JSON.parse(localCartData);
+    return [];
   }
 };
 
 const initalState = {
   price: 0,
-  // cart: getLocalCartData(),
-  cart:[],
+  cart: getLocalCartData(),
   totalPrice: 0,
   totalNoOfItems: 0,
   shippingFee: 0,
@@ -55,7 +54,6 @@ export const CartProvider = ({ children }) => {
     dispatch({ type: "TOTAL_PRICE" });
     dispatch({ type: "TOTAL_ITEMS" });
     dispatch({ type: "SHIPPING_CHARGE" });
-
     promoSubmitHandler();
   }, [state.cart]);
 
